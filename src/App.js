@@ -1,7 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { FETCH } from "../src/services/openweatherapi";
 
 function App() {
+
+  console.log(FETCH);
+
+
   return (
     <div className="App">
       <header className="App-header">
