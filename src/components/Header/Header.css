@@ -1,0 +1,36 @@
+.logo {
+    color: #61dafb;
+}
+
+div {
+      background-color: #282c34;
+}
+
+#formLocation {
+    border-radius: 23px;
+    border: none;
+    max-width: 22rem;
+}
+
+.App-logo {
+  height: 6vmin;
+  pointer-events: none;
+  margin-top: 1em;
+  margin-right: 1em;
+  color: yellow;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
