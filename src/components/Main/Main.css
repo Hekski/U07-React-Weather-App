@@ -1,0 +1,28 @@
+h5 {
+  font-size: 3em;
+}
+
+.temp {
+  font-size: 13em;
+  text-align: left;
+}
+
+.sunTime {
+  font-size: 3em;
+}
+
+.sunTime p {
+  text-align: right;
+}
+
+.scale {
+  text-align: left;
+}
+
+.info {
+  text-align: left;
+}
+
+.infoIcon {
+      height: 30vmin;
+}
