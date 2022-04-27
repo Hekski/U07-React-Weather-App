@@ -35,6 +35,11 @@ function App() {
     console.log("QUERY" + query);
   };
 
+  const handleHereClicked = () => {
+    setLoading(true);
+    getMyLocation();
+  };
+
   const setLocation = (query) => {
     Fetch(`${query}`).then((data) => {
       setData(data);
@@ -57,9 +62,9 @@ function App() {
           title="Weather App"
           setUnits={setUnits}
           handleSearch={handleSearch}
-          // clickShowCurrPos={getPosition}
+          handleHereClicked={handleHereClicked}
         />
-        <Location data={data} sys={data.sys} current={setUserLocation} />
+        <Location data={data} sys={data.sys} />
         <Main
           main={data.main}
           weather={data.weather}
