@@ -2,7 +2,17 @@ import "./Main.css";
 import { Container } from "react-bootstrap";
 import sunup from "../../assets/sunup.svg";
 import sundown from "../../assets/sundown.svg";
-import infoicon from "../../assets/infoicon.svg";
+import cloudy from "../../assets/Weather/wi-cloudy.svg";
+import clear from "../../assets/Weather/wi-day-sunny.svg";
+import fog from "../../assets/Weather/wi-fog.svg";
+import snow from "../../assets/Weather/wi-night-snow.svg";
+import thunderstorm from "../../assets/Weather/wi-storm-showers.svg";
+import drizzle from "../../assets/Weather/wi-storm-showers.svg";
+import rain from "../../assets/Weather/wi-rain.svg";
+import dust from "../../assets/Weather/wi-dust.svg";
+import mist from "../../assets/Weather/wi-dust.svg";
+import haze from "../../assets/Weather/wi-dust.svg";
+import smoke from "../../assets/Weather/wi-dust.svg";
 
 const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
   const unixTimeToDate = (UTC, timeZoneOffset) => {
@@ -26,9 +36,21 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
     },
   };
 
-  /* const dateTime = new Date(1650855933);
-  dateTime.toISOString();
-  console.log("HEJ" + dateTime); */
+  const icons = {
+    Clear: clear,
+    Clouds: cloudy,
+    Haze: haze,
+    Dust: dust,
+    Mist: mist,
+    Rain: rain,
+    Drizzle: drizzle,
+    Thunderstorm: thunderstorm,
+    Fog: fog,
+    Smoke: smoke,
+    Snow: snow,
+  };
+
+  const cloudIcon = icons[weather[0].main];
 
   return (
     <Container>
@@ -38,7 +60,7 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
           {Math.round(main.temp)}
           <span>&deg;</span>
         </h1>
-        <img src={infoicon} className="infoIcon" />
+        <img src={cloudIcon} className="infoIcon" />
       </div>
 
       <div className="d-flex justify-content-around">

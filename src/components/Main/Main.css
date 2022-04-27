@@ -20,5 +20,6 @@ h5 {
 }
 
 .infoIcon {
-      height: 30vmin;
+  height: 30vmin;
+  filter:  brightness(0) invert(1);
 }
