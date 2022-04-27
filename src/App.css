@@ -4,3 +4,12 @@
   background-color: #282c34;
   color: white;
 }
+.loading {
+  min-height: 100vh;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding-top: 4em;
+
+}

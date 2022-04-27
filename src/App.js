@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, setState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Location from "./components/Location/Location";
@@ -9,47 +9,80 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [userLocation, setUserLocation] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [units, setUnits] = useState({
+    unit: "metric",
+    deg: "C",
+    speed: "m/s",
+  });
 
-  const getMyLocation = (query) => {
+  const getMyLocation = () => {
     const location = window.navigator && window.navigator.geolocation;
-    
+
     if (location) {
       location.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        console.log(lat);
-        console.log(lon);
-        setLocation(`weather?lat=${lat}&lon=${lon}`);
+        setLocation(`weather?lat=${lat}&lon=${lon}&units=${units.unit}`);
       });
     }
   };
-  
-  const searchLocation = (query) => {
-    setLocation(`${query}`);
-  };
-  
+
   const setLocation = (query) => {
     Fetch(`${query}`).then((data) => {
-      setUserLocation(data);
-      console.log(JSON.stringify(data));
+      setData(data);
+      console.log(data);
     });
   };
 
   useEffect(() => {
-    if (setUserLocation) {
-      getMyLocation();
-    }
-  }, [setUserLocation]);
+    setLoading(true);
+    setTimeout(() => {
+      if (userLocation) {
+        getMyLocation(units);
+      }
+    }, 1000);
+    setLoading(false);
+  }, [units]);
 
-  return (
-    <div className="App">
-      <Header title="Weather App" />
-      <Location searchLocation={searchLocation} />
-      <Main searchLocation={searchLocation} />
-      <Wind />
-      <header className="App-header"></header>
-    </div>
-  );
+  if (!loading && data) {
+    return (
+      <div className="App">
+        <Header
+          title="Weather App"
+          setUnits={setUnits}
+          // clickShowCurrPos={getPosition}
+        />
+        <Location
+          data={data}
+          sys={data.sys}
+          current={setUserLocation}
+          // location={data.filter((data) => data.data.toLowerCase())}
+        />
+        <Main
+          main={data.main}
+          weather={data.weather}
+          clouds={data.clouds.all}
+          visibility={data.visibility}
+          sys={data.sys}
+          timezone={data.timezone}
+
+          // units={data.units}
+        />
+        <Wind 
+          wind={data.wind}
+          units={units}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className="loading">
+        <span>Weather data is loading...</span>
+      </div>
+    );
+  }
 }
 
 export default App;
