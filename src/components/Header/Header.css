@@ -34,3 +34,17 @@ div {
     transform: rotate(360deg);
   }
 }
+
+.unitBtn {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+.unitBtn:active {
+	color: #61dafb;
+
+}
