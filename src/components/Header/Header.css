@@ -1,23 +1,21 @@
 .logo {
-    color: #61dafb;
+  color: #61dafb;
+}
+
+.logo-cloud {
+  height: 9vmin;
+  filter: invert(23%) sepia(20%) saturate(2926%) hue-rotate(162deg)
+    brightness(253%) contrast(130%);
 }
 
 div {
-      background-color: #282c34;
+  background-color: #282c34;
 }
 
-#formLocation {
-    border-radius: 23px;
-    border: none;
-    max-width: 22rem;
-}
-
-.App-logo {
-  height: 6vmin;
-  pointer-events: none;
-  margin-top: 1em;
-  margin-right: 1em;
-  color: yellow;
+#input {
+  border-radius: 23px;
+  border: none;
+  max-width: 10rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -37,14 +35,38 @@ div {
 
 .unitBtn {
   background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
-.unitBtn:active {
-	color: #61dafb;
+.unitBtn:hover,
+unitBtn:active {
+  color: #61dafb;
+  transition: 0.1s ease-out;
+}
 
+.here {
+  height: 4vmin;
+  filter: brightness(0) invert(1);
+}
+
+.here-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  height: 4vmin;
+  filter: brightness(0) invert(1);
+}
+
+.here-btn:hover {
+  filter: invert(55%) sepia(28%) saturate(2636%) hue-rotate(164deg)
+    brightness(143%) contrast(80%);
+  transition: 0.1s ease-out;
 }

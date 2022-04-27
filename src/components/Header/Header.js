@@ -2,55 +2,61 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import "./Header.css";
-import logo from "../../assets/logo.svg";
+import here from "../../assets/wi-here.svg";
+import smoke from "../../assets/Weather/wi-storm-showers.svg";
 
-const Header = ({ setUnits }) => {
+const Header = ({ setUnits, handleSearch, handleHereClicked }) => {
   const [unitClicked, setUnitClicked] = useState("metric");
+  const [newSearch, setNewSearch] = useState("");
 
-  const unit = {
-    metric: { unit: "metric", deg: "C", speed: "m/s" },
-    imperial: { unit: "imperial", deg: "F", speed: "mph" },
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(newSearch);
+    setNewSearch("");
+    console.log("HEJ" + newSearch);
   };
-
-  
 
   const btnClicked = (unit) => {
     setUnits(unit);
-    setUnitClicked(unit.unit);
+    setUnitClicked(unit);
     console.log(unit);
   };
 
   return (
     <Container>
-      <div className="d-flex justify-content-between">
-        <div className="d-flex align-middle">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="logo display-5 mt-2">Header</h1>
+      <div className="d-flex justify-content-between align-items-center pt-2">
+        <div className="d-flex">
+          <h1 className="logo display-5">Weddy</h1>
+          <img className="logo-cloud" src={smoke} />
         </div>
 
         <div className="d-flex">
-          <button
-            href="#"
-            className="unitBtn me-2"
-            onClick={() => btnClicked(unit.metric)}
-          >
-            C&deg;{" "}
+          <button className="unitBtn me-2" onClick={() => btnClicked("metric")}>
+            <h3>C&deg;</h3>
           </button>
           <button
-            href="#"
             className="unitBtn me-2"
-            onClick={() => btnClicked(unit.imperial)}
+            onClick={() => btnClicked("imperial")}
           >
-            F&deg;
+            <h3>F&deg;</h3>
           </button>
 
-          <div className="d-flex flex-row align-middle">
-            <Form.Group
-              className="align-items-center mt-3"
-              controlId="formLocation"
+          <div className="d-flex flex-row">
+            <Form controlId="formLocation" onSubmit={handleSearchSubmit}>
+              <Form.Control
+                type="text"
+                id="input"
+                placeholder="Enter a Location"
+                value={newSearch}
+                onChange={(e) => setNewSearch(e.target.value)}
+              />
+            </Form>
+            <button
+              className="here-btn ms-3"
+              onClick={() => handleHereClicked("")}
             >
-              <Form.Control type="text" placeholder="Enter a Location" />
-            </Form.Group>
+              <img src={here} className="here ms-3" />
+            </button>
           </div>
         </div>
       </div>
