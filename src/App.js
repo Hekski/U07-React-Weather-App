@@ -7,15 +7,16 @@ import Wind from "./components/Wind/Wind";
 import { Fetch } from "./services/openweatherapi";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const unitData = {
+  metric: { unit: "metric", deg: "C", speed: "m/s" },
+  imperial: { unit: "imperial", deg: "F", speed: "mph" },
+};
+
 function App() {
   const [userLocation, setUserLocation] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
-  const [units, setUnits] = useState({
-    unit: "metric",
-    deg: "C",
-    speed: "m/s",
-  });
+  const [units, setUnits] = useState("metric");
 
   const getMyLocation = () => {
     const location = window.navigator && window.navigator.geolocation;
@@ -24,26 +25,29 @@ function App() {
       location.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        setLocation(`weather?lat=${lat}&lon=${lon}&units=${units.unit}`);
+        setLocation(`weather?lat=${lat}&lon=${lon}&units=${units}`);
       });
     }
+  };
+
+  const handleSearch = (query) => {
+    setLocation(`weather?&units=${units}&q=${query}`);
+    console.log("QUERY" + query);
   };
 
   const setLocation = (query) => {
     Fetch(`${query}`).then((data) => {
       setData(data);
+      setLoading(false);
       console.log(data);
     });
   };
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      if (userLocation) {
-        getMyLocation(units);
-      }
-    }, 1000);
-    setLoading(false);
+    if (userLocation) {
+      getMyLocation(units);
+    }
   }, [units]);
 
   if (!loading && data) {
@@ -52,14 +56,10 @@ function App() {
         <Header
           title="Weather App"
           setUnits={setUnits}
+          handleSearch={handleSearch}
           // clickShowCurrPos={getPosition}
         />
-        <Location
-          data={data}
-          sys={data.sys}
-          current={setUserLocation}
-          // location={data.filter((data) => data.data.toLowerCase())}
-        />
+        <Location data={data} sys={data.sys} current={setUserLocation} />
         <Main
           main={data.main}
           weather={data.weather}
@@ -67,13 +67,8 @@ function App() {
           visibility={data.visibility}
           sys={data.sys}
           timezone={data.timezone}
-
-          // units={data.units}
         />
-        <Wind 
-          wind={data.wind}
-          units={units}
-        />
+        <Wind wind={data.wind} units={unitData[units]} />
       </div>
     );
   } else {
