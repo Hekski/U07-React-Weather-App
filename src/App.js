@@ -4,6 +4,8 @@ import Header from "./components/Header/Header";
 import Location from "./components/Location/Location";
 import Main from "./components/Main/Main";
 import Wind from "./components/Wind/Wind";
+import Day from "./components/Day/Day";
+import Footer from "./components/Footer/Footer";
 import { Fetch } from "./services/openweatherapi";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,8 +16,10 @@ const unitData = {
 
 function App() {
   const [userLocation, setUserLocation] = useState([]);
+  const [cords, setCords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
+  const [dataday, setDataDay] = useState(null);
   const [units, setUnits] = useState("metric");
 
   const getMyLocation = () => {
@@ -25,14 +29,23 @@ function App() {
       location.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        setLocation(`weather?lat=${lat}&lon=${lon}&units=${units}`);
+        setLocation(`lat=${lat}&lon=${lon}&units=${units}`);
       });
     }
   };
 
+  const setLocation = (query) => {
+    Fetch(`weather?${query}`).then((data) => {
+      setData(data);
+      setLoading(false);
+    });
+    Fetch(`forecast?${query}&cnt=8`).then((dataday) => {
+      setDataDay(dataday);
+    });
+  };
+
   const handleSearch = (query) => {
     setLocation(`weather?&units=${units}&q=${query}`);
-    console.log("QUERY" + query);
   };
 
   const handleHereClicked = () => {
@@ -40,20 +53,12 @@ function App() {
     getMyLocation();
   };
 
-  const setLocation = (query) => {
-    Fetch(`${query}`).then((data) => {
-      setData(data);
-      setLoading(false);
-      console.log(data);
-    });
-  };
-
   useEffect(() => {
     setLoading(true);
     if (userLocation) {
       getMyLocation(units);
     }
-  }, [units]);
+  }, [units, userLocation]);
 
   if (!loading && data) {
     return (
@@ -72,8 +77,12 @@ function App() {
           visibility={data.visibility}
           sys={data.sys}
           timezone={data.timezone}
+          dt={data.dt}
+          // fetchExtendedData={fetchExtendedData}
         />
         <Wind wind={data.wind} units={unitData[units]} />
+        <Day dataday={dataday.list} units={unitData[units]} />
+        <Footer />
       </div>
     );
   } else {
