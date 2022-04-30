@@ -21,15 +21,14 @@
   top: 2px;
 }
 
-h5 {
-  font-size: 3em;
+.date {
+  animation: 1s ease-out 0s 1 slideInFromBottom;
 }
 
 .temp {
-  font-size: 13em;
+  font-size: 9em;
   text-align: left;
   animation: 1s ease-out 0s 1 slideInFromBottom;
-  
 }
 
 .sunTime p {

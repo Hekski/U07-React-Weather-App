@@ -15,7 +15,7 @@ import haze from "../../assets/Weather/wi-dust.svg";
 import smoke from "../../assets/Weather/wi-dust.svg";
 import logo from "../../assets/logo.svg";
 
-const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
+const Main = ({ main, weather, clouds, visibility, sys, timezone, dt }) => {
   const unixTimeToDate = (UTC, timeZoneOffset) => {
     const dateTime = UTC * 1000 + timeZoneOffset;
     return new Date(dateTime);
@@ -27,9 +27,10 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
       minute: "2-digit",
     },
     date: {
-      weekday: "long",
       day: "numeric",
       month: "long",
+      hour: "2-digit",
+      minute: "2-digit",
     },
     sun: {
       hour: "2-digit",
@@ -55,7 +56,10 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
 
   return (
     <Container>
-      <h4 className="underscore">{weather[0].description}</h4>
+      <h6 className="date">
+        {unixTimeToDate(dt, timezone).toLocaleTimeString([], options.date)}
+      </h6>
+      <h4 className="underscore">Mostly {weather[0].description}</h4>
       <div className="d-flex justify-content-around align-items-center">
         <h1 className="temp">
           {Math.round(main.temp)}
@@ -87,14 +91,14 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone }) => {
         </h2>
       </div>
 
-      <div className="d-flex mt-5 flex-direction-row justify-content-around align-items-center">
+      <div className="d-flex mt-4 flex-direction-row justify-content-around align-items-center">
         <div className="text-start">
           <h4>
-            Temp min&nbsp;&nbsp; {Math.round(main.temp_min)}
+            Min temp&nbsp;&nbsp; {Math.round(main.temp_min)}
             <span>&deg;</span>
           </h4>
           <h4>
-            Temp max&nbsp;&nbsp; {Math.round(main.temp_max)}
+            Max temp&nbsp;&nbsp; {Math.round(main.temp_max)}
             <span>&deg;</span>
           </h4>
           <h4>

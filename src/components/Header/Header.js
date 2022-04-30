@@ -13,13 +13,11 @@ const Header = ({ setUnits, handleSearch, handleHereClicked }) => {
     e.preventDefault();
     handleSearch(newSearch);
     setNewSearch("");
-    console.log("HEJ" + newSearch);
   };
 
   const btnClicked = (unit) => {
     setUnits(unit);
     setUnitClicked(unit);
-    console.log(unit);
   };
 
   return (
@@ -52,7 +50,7 @@ const Header = ({ setUnits, handleSearch, handleHereClicked }) => {
               />
             </Form>
             <button
-              className="here-btn ms-3"
+              className="here-btn ms-1"
               onClick={() => handleHereClicked("")}
             >
               <img src={here} className="here ms-3" />
