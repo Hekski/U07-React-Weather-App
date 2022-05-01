@@ -44,7 +44,7 @@ div {
 }
 .unitBtn:hover,
 unitBtn:active {
-  color: #61dafb;
+  color: #00D8FF;
   transition: 0.1s ease-out;
 }
 

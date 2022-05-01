@@ -1,5 +1,10 @@
 import "./Day.css";
 import { Container } from "react-bootstrap";
+import time from "../../assets/wi-time-4.svg";
+import hum from "../../assets/wi-humidity.svg";
+import temp from "../../assets/wi-thermometer.svg";
+import wind from "../../assets/wi-small-craft-advisory.svg";
+
 
 const unixTimeToDate = (unixUTC) => {
   return new Date(unixUTC * 1000);
@@ -15,11 +20,9 @@ const Day = ({ dataday, units }) => {
   return (
     <Container>
       <div className="pb-3 border-bottom">
-        <h4 className="pt-3 pb-2">Next 24 hours</h4>
-        <ul className="Hour d-flex flex-row text-start justify-content-around mb-1">
-          <p>
-            <strong>Hour</strong>
-          </p>
+        <h4 className="pt-4 pb-2">Next 24 hours</h4>
+        <ul className="Hour d-flex flex-row justify-content-around mb-3">
+          <img className="time" src={time} alt="Wind direction" />
           {dataday.map((item) => (
             <>
               <li key={item}>
@@ -31,7 +34,7 @@ const Day = ({ dataday, units }) => {
           ))}
         </ul>
         <ul className="Temp d-flex flex-row text-start justify-content-around mb-3">
-          <strong>Temp</strong>
+          <img className="time" src={temp} alt="Wind direction" />
           {dataday.map((item) => (
             <>
               <li key={item}>
@@ -42,7 +45,11 @@ const Day = ({ dataday, units }) => {
           ))}
         </ul>
         <ul className="Temp d-flex flex-row text-start justify-content-around mb-3">
-          <strong>Hum</strong>
+          <img
+              className="hum"
+              src={hum}
+              alt="Wind direction"
+            />
           {dataday.map((item) => (
             <>
               <li key={item.list}>{Math.round(item.main.humidity)}</li>
@@ -50,7 +57,11 @@ const Day = ({ dataday, units }) => {
           ))}
         </ul>
         <ul className="Temp d-flex flex-row text-start justify-content-around mb-3">
-          <strong>&nbsp;&nbsp;Wind</strong>
+          <img
+              className="time"
+              src={wind}
+              alt="Wind direction"
+            />
           {dataday.map((item) => (
             <>
               <li key={item.list}>

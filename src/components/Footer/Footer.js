@@ -7,9 +7,9 @@ const Footer = () => {
         <span>Henrik Berglund 2022, </span>
         School Assignment @ Chas Academy, class FWD21
       </p>
-      <p className="pb-5">
+      <span>
         <a href="#">Weather App @ GitHub</a>
-      </p>
+      </span>
     </footer>
   );
 };

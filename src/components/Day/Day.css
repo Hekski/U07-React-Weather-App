@@ -1,5 +1,15 @@
-.Hour, .Temp {
+.Hour,
+.Temp {
   list-style-type: none;
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
+}
+
+.time {
+  height: 6vmin;
+  filter: brightness(0) invert(1);
+}
+.hum {
+  height: 8vmin;
+  filter: brightness(0) invert(1);
 }

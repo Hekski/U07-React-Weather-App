@@ -85,18 +85,18 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone, dt }) => {
       </div>
 
       <div className="d-flex justify-content-between mt-1">
-        <h2>
+        <h5>
           {unixTimeToDate(sys.sunrise, timezone).toLocaleTimeString(
             [],
             options.sun
           )}
-        </h2>
-        <h2>
+        </h5>
+        <h5>
           {unixTimeToDate(sys.sunset, timezone).toLocaleTimeString(
             [],
             options.sun
           )}
-        </h2>
+        </h5>
       </div>
 
       <div className="d-flex mt-4 flex-direction-row justify-content-around align-items-center">

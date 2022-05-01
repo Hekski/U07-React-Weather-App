@@ -2,6 +2,8 @@ import React from "react";
 import "./Wind.css";
 import { Container } from "react-bootstrap";
 import windy from "../../assets/windy.svg";
+import flag from "../../assets/wi-small-craft-advisory.svg";
+
 
 const Wind = ({ wind, units }) => {
   return (
@@ -17,6 +19,7 @@ const Wind = ({ wind, units }) => {
             Wind <small>(gust wind)</small>
           </h4>
           <h2>
+          <img className="flag" src={flag} alt="Wind icon" />
             {Math.round(wind.speed)} ({Math.round(wind.gust)}) {units.speed}
           </h2>
         </div>
