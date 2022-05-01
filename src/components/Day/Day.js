@@ -22,7 +22,7 @@ const Day = ({ dataday, units }) => {
           </p>
           {dataday.map((item) => (
             <>
-              <li key={item.list}>
+              <li key={item}>
                 <strong>
                   {unixTimeToDate(item.dt).toLocaleTimeString([], options.time)}
                 </strong>
@@ -34,7 +34,7 @@ const Day = ({ dataday, units }) => {
           <strong>Temp</strong>
           {dataday.map((item) => (
             <>
-              <li key={item.list}>
+              <li key={item}>
                 {Math.round(item.main.temp)}
                 <span>&deg;</span>
               </li>
