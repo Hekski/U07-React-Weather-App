@@ -65,15 +65,23 @@ const Main = ({ main, weather, clouds, visibility, sys, timezone, dt }) => {
           {Math.round(main.temp)}
           <span>&deg;</span>
         </h1>
-        <img src={cloudIcon} className="infoIcon" />
+        <img src={cloudIcon} className="infoIcon" alt="Current weather icon" />
       </div>
 
       <div className="container d-flex justify-content-between align-items-end border-bottom">
-        <img src={horizon} className="App-logo-horizon ms-3" />
-        <img src={horizonalt} className="App-logo-horizon-alt me-4" />
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src={horizonalt} className="App-logo-horizon-alt ms-4" />
-        <img src={horizon} className="App-logo-horizon me-3" />
+        <img src={horizon} className="App-logo-horizon ms-3" alt="sunrise" />
+        <img
+          src={horizonalt}
+          className="App-logo-horizon-alt me-4"
+          alt="sunrise"
+        />
+        <img src={logo} className="App-logo" alt="sun" />
+        <img
+          src={horizonalt}
+          className="App-logo-horizon-alt ms-4"
+          alt="sunset"
+        />
+        <img src={horizon} className="App-logo-horizon me-3" alt="sunset" />
       </div>
 
       <div className="d-flex justify-content-between mt-1">

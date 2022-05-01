@@ -7,7 +7,11 @@ const Wind = ({ wind, units }) => {
   return (
     <Container>
       <div className="container d-flex justify-content-around align-items-center mt-5 pb-4 border-bottom">
-        <img src={windy} style={{ transform: `rotate(${wind.deg}deg)` }} />
+        <img
+          src={windy}
+          style={{ transform: `rotate(${wind.deg}deg)` }}
+          alt="Wind direction"
+        />
         <div>
           <h4>
             Wind <small>(gust wind)</small>

@@ -25,17 +25,15 @@ const Header = ({ setUnits, handleSearch, handleHereClicked }) => {
       <div className="d-flex justify-content-between align-items-center pt-2">
         <div className="d-flex">
           <h1 className="logo display-5">Weddy</h1>
-          <img className="logo-cloud" src={smoke} />
+          <img className="logo-cloud" src={smoke} alt="logo" />
         </div>
 
         <div className="d-flex">
+          
           <button className="unitBtn me-2" onClick={() => btnClicked("metric")}>
             <h3>C&deg;</h3>
           </button>
-          <button
-            className="unitBtn me-2"
-            onClick={() => btnClicked("imperial")}
-          >
+          <button className="unitBtn me-2" onClick={() => btnClicked("imperial")}>
             <h3>F&deg;</h3>
           </button>
 
@@ -53,7 +51,7 @@ const Header = ({ setUnits, handleSearch, handleHereClicked }) => {
               className="here-btn ms-1"
               onClick={() => handleHereClicked("")}
             >
-              <img src={here} className="here ms-3" />
+              <img src={here} className="here ms-3" alt="Your location" />
             </button>
           </div>
         </div>
