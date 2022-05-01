@@ -5,6 +5,7 @@ import Location from "./components/Location/Location";
 import Main from "./components/Main/Main";
 import Wind from "./components/Wind/Wind";
 import Day from "./components/Day/Day";
+import Week from "./components/Week/Week";
 import Footer from "./components/Footer/Footer";
 import { Fetch } from "./services/openweatherapi";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,42 +17,54 @@ const unitData = {
 
 function App() {
   const [userLocation, setUserLocation] = useState([]);
-  const [cords, setCords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [dataday, setDataDay] = useState(null);
   const [units, setUnits] = useState("metric");
-
-  const getMyLocation = () => {
-    const location = window.navigator && window.navigator.geolocation;
-
-    if (location) {
-      location.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        setLocation(`lat=${lat}&lon=${lon}&units=${units}`);
-      });
-    }
-  };
-
-  const setLocation = (query) => {
-    Fetch(`weather?${query}`).then((data) => {
-      setData(data);
-      setLoading(false);
-    });
-    Fetch(`forecast?${query}&cnt=8`).then((dataday) => {
-      setDataDay(dataday);
-    });
-  };
+  // const [location, setLocation] = useState('');
+  // const [dataweek, setDataWeek] = useState(null);
 
   const handleSearch = (query) => {
-    setLocation(`weather?&units=${units}&q=${query}`);
+    setLoading(true);
+    setLocation(`q=${query}&units=${units}`);
   };
 
   const handleHereClicked = () => {
     setLoading(true);
     getMyLocation();
   };
+
+  const getMyLocation = () => {
+    const location = window.navigator && window.navigator.geolocation;
+
+    if (location) {
+      location.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          setLocation(`lat=${lat}&lon=${lon}&units=${units}`);
+        },
+        (error) => {
+          console.error(`ERROR (${error.code}): ${error.message}`);
+        }
+      );
+    } else {
+      alert("Location not available");
+    }
+  };
+
+  async function setLocation(query) {
+    await Promise.all([
+      Fetch(`weather?${query}`),
+      Fetch(`forecast?${query}&cnt=8`),
+      // Fetch(`onecall?${query}&exclude=minutely,hourly`),
+    ]).then(([data, dataday, dataweek]) => {
+      setLoading(false);
+      setData(data);
+      setDataDay(dataday.list);
+      // setDataWeek(dataweek.daily);
+    });
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -78,10 +91,11 @@ function App() {
           sys={data.sys}
           timezone={data.timezone}
           dt={data.dt}
-          // fetchExtendedData={fetchExtendedData}
         />
         <Wind wind={data.wind} units={unitData[units]} />
-        <Day dataday={dataday.list} units={unitData[units]} />
+
+        <Day dataday={dataday} units={unitData[units]} />
+        {/* <Week dataweek={dataweek} units={unitData[units]} /> */}
         <Footer />
       </div>
     );
@@ -98,3 +112,4 @@ export default App;
 
 // Inspiration:
 // https://stackoverflow.com/questions/46387375/reactjs-get-latitude-on-click-and-show-it-in-input
+// https://stackoverflow.com/questions/46241827/fetch-api-requesting-multiple-get-requests
