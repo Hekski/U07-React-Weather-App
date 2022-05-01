@@ -14,9 +14,9 @@ As a user, you should be able to:
   - [x] Humidity
   - [x] Sunrise and sunset (time)
   - [x] Choose between Farenheit and Celsius
-  - [x] Brief overview for the week (not finished)
+  -  Brief overview for the week (not finished)
   - [x] Every three hours for the current day
-  - [x] 5-day forecast (not finished)
+  -  5-day forecast (not finished)
 
 The finished solution must:
 
