@@ -26,7 +26,7 @@ The finished solution must:
 
 ## Deployment
 
-The site is deployed on Netlify: Soon...
+The site is deployed on Netlify: https://626fcf4bf34b19385ec1a2ed--weather-app-e534c1.netlify.app/
 
 ## Notes
 
